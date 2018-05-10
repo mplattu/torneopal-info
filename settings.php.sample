@@ -1,0 +1,16 @@
+<?php
+
+  // Your API key to access Torneopal API
+  $MY_API_KEY = "someapikey";
+
+  // Your Torneopal API base URL without the trailing slash
+  $MY_API_URL = "https://spl.torneopal.fi/taso/rest";
+
+  // Turn this to TRUE when you're using debug.php.
+  $ALLOW_DEBUG = false;
+
+  // Fill these API parameters according to your location (see README.md)
+  $API_PARAMETERS = Array(
+    'venues' => "2673,355,2674"
+  );
+?>
