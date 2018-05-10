@@ -13,4 +13,9 @@
   $API_PARAMETERS = Array(
     'venues' => "2673,355,2674"
   );
+
+  // HTML header and footer for screen.php
+  $HTML_HEADER = '<html><head><link rel="stylesheet" type="text/css" href="screen.css"></head><body>';
+  $HTML_FOOTER = '</body></html>';
+
 ?>

@@ -23,7 +23,7 @@
   }
 
   if (!is_null($html)) {
-    print $html;
+    print $HTML_HEADER.$html.$HTML_FOOTER;
   }
   elseif (!is_null($data)) {
     print_r($data);
@@ -50,6 +50,10 @@
       $this_result = Array(
         'team_A_name' => $this_match['team_A_name'],
         'team_B_name' => $this_match['team_B_name'],
+        'team_A_iconurl' => $api->getTeamIcon($this_match['club_A_id']),
+        'team_B_iconurl' => $api->getTeamIcon($this_match['club_B_id']),
+        'fs_A' => $this_match['fs_A'],
+        'fs_B' => $this_match['fs_B'],
         'category_name' => $this_match['category_name'],
         'round_name' => $this_match['round_name'],
         'venue_name' => $this_match['venue_name'],
@@ -65,19 +69,32 @@
   }
 
   function get_match_html ($data) {
-    $html = '<table>';
+    $html = '<table id="table_games">';
 
     foreach ($data as $this_match) {
-      $row = '<tr>';
-      $row .= '<td><span class="date">'.$this_match['date'].'</span> <span class="time">'.$this_match['time'].'-'.$this_match['time_end'].'</span></td>';
-      $row .= '<td><span class="category">'.$this_match['category_name'].'</span> <span class="round">'.$this_match['round_name'].'</span></td>';
-      $row .= '<td><span class="venue">'.$this_match['venue_name'].'</span></td>';
+      $row = '<tr class="row_details">';
+      $row .= '<td colspan="5">';
+      $row .= '<span class="date">'.$this_match['date'].'</span> <span class="time">'.$this_match['time'].'-'.$this_match['time_end'].'</span>';
+      $row .= '<span class="category">'.$this_match['category_name'].'</span> <span class="round">'.$this_match['round_name'].'</span>';
+      $row .= '<span class="venue">'.$this_match['venue_name'].'</span>';
       $row .= '</tr>';
       $html .= $row;
 
-      $row = '<tr>';
-      $row .= '<td><span class="team_home">'.$this_match['team_A_name'].'</span></td>';
-      $row .= '<td><span class="team_visitor">'.$this_match['team_B_name'].'</span></td>';
+      $score_home = '';
+      $score_visitor = '';
+      if ($this_match['fs_A'] != "") {
+        $score_home = '<br/>'.$this_match['fs_A'];
+      }
+      if ($this_match['fs_B'] != "") {
+        $score_visitor = '<br/>'.$this_match['fs_B'];
+      }
+
+      $row = '<tr class="row_teams">';
+      $row .= '<td><span class="icon_home"><img src="'.$this_match['team_A_iconurl'].'" class="icon_home_img"></span></td>';
+      $row .= '<td class="cell_team_home"><span class="team_home">'.$this_match['team_A_name'].$score_home.'</span></td>';
+      $row .= '<td class="cell_team_middle">-</td>';
+      $row .= '<td class="cell_team_visitor"><span class="team_visitor">'.$this_match['team_B_name'].$score_visitor.'</span></td>';
+      $row .= '<td><span class="icon_visitor"><img src="'.$this_match['team_B_iconurl'].'" class="icon_visitor_img"></span></td>';
       $row .= '</tr>';
       $html .= $row;
     }

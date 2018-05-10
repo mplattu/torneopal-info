@@ -1,6 +1,7 @@
 <?php
 
 class TorneopalInfo {
+  private $ICONURL = "https://torneopal-sentinelsoftware.netdna-ssl.com/logo/palloliitto/%dx.png";
   private $APIKEY = null;
   private $APIURL = null;
 
@@ -56,6 +57,9 @@ class TorneopalInfo {
     return $data['matches'];
   }
 
+  public function getTeamIcon ($team_id) {
+    return sprintf($this->ICONURL, $team_id);
+  }
 }
 
 ?>

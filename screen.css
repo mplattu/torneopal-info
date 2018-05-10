@@ -1,0 +1,46 @@
+body {
+  font-family: Arial,Helvetica,sans-serif;
+  background-color: green;
+  color: white;
+}
+
+#table_games {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+}
+
+.team_home, .team_visitor {
+  font-size: 40pt;
+}
+
+.cell_team_middle {
+  font-size: 40pt;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+}
+
+.cell_team_home {
+  margin-right: 20px;
+  text-align: right;
+}
+
+.cell_team_visitor {
+  margin-left: 20px;
+  text-align: left;
+}
+
+.icon_home_img, .icon_visitor_img {
+  height:50%;
+}
+
+.row_details {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: lightgreen;
+}
+
+.date, .time, .category, .round, .venue {
+  margin-right: 10px;
+}
