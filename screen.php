@@ -14,11 +14,12 @@
 
   if ($function == 'getMatches') {
     $limit = allowed_chars_number($_GET['limit']);
+    $nopassed = allowed_chars_number($_GET['nopassed']);
     $current_season = date('Y');
     $start_date = date('Y-m-d');
     $match_data = $api->getMatches(Array('season_id'=>$current_season, 'start_date'=>$start_date, 'venue_id'=>$API_PARAMETERS['venues'], 'joined_venues'=>0));
 
-    $combined_data = get_match_data($match_data, $limit);
+    $combined_data = get_match_data($match_data, Array('limit'=>$limit, 'nopassed'=>$nopassed));
     $html = get_match_html($combined_data);
   }
 
@@ -33,8 +34,13 @@
 
 
 
-  function get_match_data($data, $limit) {
+  function get_match_data($data, $param) {
     global $api;
+
+    // Limit value defaults to 5
+    if (is_null($param['limit']) or $param['limit'] == "") {
+      $param['limit'] = 5;
+    }
 
     $match_count = 0;
 
@@ -42,8 +48,15 @@
 
     foreach ($data as $this_match) {
       $match_count++;
-      if ($match_count > $limit) {
+      if ($match_count > $param['limit']) {
         // We have reached the $limit
+        break;
+      }
+
+      // Calculate unix end time to check "nopassed" parameter
+      $end_unixtime = strtotime($this_match['date'].' '.$this_match['time_end']);
+      if ($param['nopassed'] > 0 and $end_unixtime < time()) {
+        // This game has already passed, skip
         break;
       }
 

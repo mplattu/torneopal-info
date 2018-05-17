@@ -24,4 +24,13 @@ Don't forget to set `$ALLOW_DEBUG` as `false` in `settings.php` to avoid unwante
 
 ## Info Screen View
 
-Get `screen.php`.
+Get `screen.php` with following parameters:
+
+ * `f`, currently the only implemented function is `getMatches`
+ * `limit`, set maximum number of games (defaults to 5)
+ * `nopassed`, 1 = don't show games which have passed. By default `getMatches` shows all games from the current day.
+
+Examples:
+
+ * `screen.php?f=getMatches&limit=10` Shows 10 matches today
+ * `screen.php?f=getMatches&nopassed=1` Shows 5 matches but skip those which have passed
