@@ -86,7 +86,7 @@
 
     foreach ($data as $this_match) {
       $row = '<tr class="row_details"><td colspan="5" class="cell_details">';
-      $row .= '<span class="date">'.$this_match['date'].'</span> <span class="time">'.$this_match['time'].'-'.$this_match['time_end'].'</span>';
+      $row .= '<span class="date">'.date_local($this_match['date']).'</span> <span class="time">'.time_local($this_match['time']).'-'.time_local($this_match['time_end']).'</span>';
       $row .= '<span class="category">'.$this_match['category_name'].'</span> <span class="round">'.$this_match['round_name'].'</span>';
       $row .= '<span class="venue">'.$this_match['venue_name'].'</span>';
       $row .= '</td></tr>';
@@ -132,4 +132,17 @@
     return $str;
   }
 
+  function date_local ($date_sql) {
+    global $LOCAL_DATE;
+
+    $unix_timestamp = strtotime($date_sql);
+    return date($LOCAL_DATE, $unix_timestamp);
+  }
+
+  function time_local ($time_sql) {
+    global $LOCAL_TIME;
+
+    $unix_timestamp = strtotime($time_sql);
+    return date($LOCAL_TIME, $unix_timestamp);
+  }
 ?>
