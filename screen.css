@@ -41,6 +41,15 @@ body {
   border-top-color: lightgreen;
 }
 
+.cell_details {
+  padding-top: 20px;
+}
+
+.cell_teams {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
 .date, .time, .category, .round, .venue {
   margin-right: 10px;
 }

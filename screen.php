@@ -85,12 +85,11 @@
     $html = '<table id="table_games">';
 
     foreach ($data as $this_match) {
-      $row = '<tr class="row_details">';
-      $row .= '<td colspan="5">';
+      $row = '<tr class="row_details"><td colspan="5" class="cell_details">';
       $row .= '<span class="date">'.$this_match['date'].'</span> <span class="time">'.$this_match['time'].'-'.$this_match['time_end'].'</span>';
       $row .= '<span class="category">'.$this_match['category_name'].'</span> <span class="round">'.$this_match['round_name'].'</span>';
       $row .= '<span class="venue">'.$this_match['venue_name'].'</span>';
-      $row .= '</tr>';
+      $row .= '</td></tr>';
       $html .= $row;
 
       $score_home = '';
@@ -102,13 +101,12 @@
         $score_visitor = '<br/>'.$this_match['fs_B'];
       }
 
-      $row = '<tr class="row_teams">';
-      $row .= '<td><span class="icon_home"><img src="'.$this_match['team_A_iconurl'].'" class="icon_home_img"></span></td>';
+      $row = '<tr><td class="cell_teams"><span class="icon_home"><img src="'.$this_match['team_A_iconurl'].'" class="icon_home_img"></span></td>';
       $row .= '<td class="cell_team_home"><span class="team_home">'.$this_match['team_A_name'].$score_home.'</span></td>';
       $row .= '<td class="cell_team_middle">-</td>';
       $row .= '<td class="cell_team_visitor"><span class="team_visitor">'.$this_match['team_B_name'].$score_visitor.'</span></td>';
-      $row .= '<td><span class="icon_visitor"><img src="'.$this_match['team_B_iconurl'].'" class="icon_visitor_img"></span></td>';
-      $row .= '</tr>';
+      $row .= '<td><span class="icon_visitor"><img src="'.$this_match['team_B_iconurl'].'" class="icon_visitor_img"></span>';
+      $row .= '</td></tr>';
       $html .= $row;
     }
 
