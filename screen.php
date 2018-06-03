@@ -57,7 +57,7 @@
       $end_unixtime = strtotime($this_match['date'].' '.$this_match['time_end']);
       if ($param['nopassed'] > 0 and $end_unixtime < time()) {
         // This game has already passed, skip
-        break;
+        continue;
       }
 
       $this_result = Array(
